@@ -5,7 +5,9 @@ const mongoDbUrl = 'mongodb+srv://strsk:eGrsz2N6qvhPSV5P@cluster0.m9kzj.mongodb.
 const url = 'http://localhost:3000';
 
 const invalidEntries = 'All fields must be filled.'
-const notFound = 'Task not found';
+const notFound = 'Task not found.';
+
+const list = [{ task: 'clean the kitchen', status: 'pendent' }];
 
 let connection;
 let todo_list;
@@ -21,7 +23,6 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   await todo_list.deleteMany({});
-  await todo_list.insertMany(taskList);
 });
 
 afterAll(async () => {
@@ -30,18 +31,18 @@ afterAll(async () => {
 
 describe('It is possible to update a task and it status', () => {
 
-  it('You cannot update a task that does not exists', () => {
+  it('You cannot update a task that does not exists', async () => {
     await frisby
-      .put(`${url}/todo/1234563`, { task: 'clean the kitchen', status: 'pendent' })
-      .expect('status', 409)
-      .then((response) => response.json.message).toBe(notFound);
+      .put(`${url}/todo/123456`, list[0])
+      .expect('status', 404)
+      .then((response) => expect(response.json.message).toBe(notFound));
   });
 
   it('You cannot update a task without the "tasks" field', async () => {
     await frisby
-      .post(`${url}/todo`, { task: 'clean the kitchen', status: 'pendent' })
+      .post(`${url}/todo`, list[0])
       .expect('status', 201)
-      .then((response => id = response.json.id));
+      .then((response => id = response.body.id));
 
     await frisby
       .put(`${url}/todo/${id}`, { status: 'pendent' })
@@ -51,9 +52,9 @@ describe('It is possible to update a task and it status', () => {
 
   it('You cannot update a task without the "status" field', async () => {
     await frisby
-      .post(`${url}/todo`, { task: 'clean the kitchen', status: 'pendent' })
+      .post(`${url}/todo`, list[0])
       .expect('status', 201)
-      .then((response => id = response.json.id));
+      .then((response => id = response.body.id));
 
     await frisby
       .put(`${url}/todo/${id}`, { task: 'clean the kitchen' })
@@ -63,9 +64,9 @@ describe('It is possible to update a task and it status', () => {
 
   it('You cannot update a task with the "tasks" field empty', async () => {
     await frisby
-      .post(`${url}/todo`, { task: 'clean the kitchen', status: 'pendent' })
+      .post(`${url}/todo`, list[0])
       .expect('status', 201)
-      .then((response => id = response.json.id));
+      .then((response => id = response.body.id));
 
     await frisby
       .put(`${url}/todo/${id}`, { task: '', status: 'pendent' })
@@ -75,9 +76,9 @@ describe('It is possible to update a task and it status', () => {
 
   it('You cannot update a task with the "status" field empty', async () => {
     await frisby
-      .post(`${url}/todo`, { task: 'clean the kitchen', status: 'pendent' })
+      .post(`${url}/todo`, list[0])
       .expect('status', 201)
-      .then((response => id = response.json.id));
+      .then((response => id = response.body.id));
 
     await frisby
       .put(`${url}/todo/${id}`, { task: 'clean the kitchen', status: '' })
@@ -87,7 +88,7 @@ describe('It is possible to update a task and it status', () => {
 
   it('You can update a task successfully', async () => {
     await frisby
-      .post(`${url}/todo`, { task: 'clean the kitchen', status: 'pendent' })
+      .post(`${url}/todo`, list[0])
       .expect('status', 201)
       .then((response => id = response.json.id));
 
