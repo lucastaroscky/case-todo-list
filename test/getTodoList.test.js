@@ -4,6 +4,8 @@ const { MongoClient } = require('mongodb');
 const mongoDbUrl = 'mongodb+srv://strsk:eGrsz2N6qvhPSV5P@cluster0.m9kzj.mongodb.net/test?authSource=admin&replicaSet=atlas-kq29l2-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true';
 const url = 'http://localhost:3000';
 
+const notFound = 'Task not found.';
+
 const list = [
   { task: 'clean the kitchen', status: 'pendent' },
   { task: 'read a book', status: 'pendent' },
@@ -49,6 +51,13 @@ describe('It is possible to list all tasks', () => {
         expect(tasks[2].status).toEqual(list[2].status);
       })
   });
+
+  it('You cannot list a task that does not exists', async () => {
+    await frisby
+      .get(`${url}/todo/123456`)
+      .expect('status', 404)
+      .then((response) => expect(response.json.message).toBe(notFound));
+  })
 
   it('It is possible to list an specific task', async () => {
     await frisby
