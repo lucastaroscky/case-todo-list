@@ -1,7 +1,7 @@
 {
   "name": "case-todo-list",
   "version": "1.0.0",
-  "description": "",
+  "description": "Basic todo list to save and read tasks",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/lucastaroscky/case-todo-list#readme",
   "dependencies": {
+    "@financial-times/health-check": "^2.1.9",
     "express": "^4.17.1",
+    "express-health-middleware": "^1.0.1",
     "express-rescue": "^1.1.31",
     "mongodb": "^3.6.5",
     "nodemon": "^2.0.7"
