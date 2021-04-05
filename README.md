@@ -49,7 +49,7 @@ curl http://localhost:3000/todo/ -X GET | json_pp
 
 - ### List a specific task
 
-   > #####  you shoud copy the id of the task that you want to see the detais and include it on the id params request.
+  > ##### you shoud copy the id of the task that you want to see the detais and include it on the id params request.
 
 ```bash
 curl http://localhost:3000/todo/id -X GET | json_pp
@@ -57,8 +57,51 @@ curl http://localhost:3000/todo/id -X GET | json_pp
 
 - ### Delete a task
 
-    > #####  you shoud copy the id of the task that you want to delete and include it on the id params request.
+  > ##### you shoud copy the id of the task that you want to delete and include it on the id params request.
 
 ```bash
 curl http://localhost:3000/todo/id -X DELETE
+```
+
+## Deployment
+
+The application was deployed on [herokuapp](https://dashboard.heroku.com/);
+To test it follot the steps:
+
+> ##### you should follow the same steps before to test the endpoint, but now changing the url to heroku.
+
+- ### To create a new task
+
+```bash
+curl http://case-todo.herokuapp.com/todo -d '{"task":"read a book", "status":"pendent"}' -H "Content-Type: application/json" -X POST | json_pp
+```
+
+- ### Update a task
+
+  > ##### you shoud copy the id of your created task to include it to the id params request to udpate.
+
+```bash
+curl http://case-todo.herokuapp.com/todo/id -d '{"task": "read a book", "status":"pendent"}' -H "Content-Type: application/json" -X PUT | json_pp
+```
+
+- ### List all taks
+
+```bash
+curl http://case-todo.herokuapp.com/todo -X GET | json_pp
+```
+
+- ### List a specific task
+
+  > ##### you shoud copy the id of the task that you want to see the detais and include it on the id params request.
+
+```bash
+curlhttp://case-todo.herokuapp.com/todo/id -X GET | json_pp
+```
+
+- ### Delete a task
+
+  > ##### you shoud copy the id of the task that you want to delete and include it on the id params request.
+
+```bash
+curl http://case-todo.herokuapp.com/todo/id -X DELETE
 ```

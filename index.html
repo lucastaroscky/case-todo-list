@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      text-align: left;
+      margin: 0 20%;
+    }
+
+    h1, span {
+      text-align: center;
+    }
+
+    p code {
+      background-color: #eee;
+      border: 1px solid #999;
+      display: inline-block;
+      padding: 10px;
+      width: inherit;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <h1 id="api---todo-list">API - todo-list</h1>
+    <span>Basic API todo-list to save and read tasks.</span>
+    <span>Created with nodejs + express and mongoDB.</span>
+    <br><br>
+    <h2 id="installation">Installation</h2>
+    <ul>
+      <li>
+        <h3>Clone the repository</h3>
+      </li>
+    </ul>
+    <p><code>bash git clone https://github.com/lucastaroscky/case-todo-list.git</code></p>
+    <ul>
+      <li>
+        <h3>Install the dependencies</h3>
+      </li>
+    </ul>
+    <p><code>bash npm install</code></p>
+    <blockquote>
+      <h5>if you don't have <code>npm</code> installed, follow this <a
+          href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm">guide</a>.</h5>
+    </blockquote>
+    <ul>
+      <li>
+        <h3>Start the server</h3>
+      </li>
+    </ul>
+    <p><code>bash npm run dev</code></p>
+    <h2 id="usage">Usage</h2>
+    <ul>
+      <li>
+        <h3>To create a new task</h3>
+      </li>
+    </ul>
+    <p>
+      <code>bash curl http://localhost:3000/todo -d '{&quot;task&quot;:&quot;read a book&quot;, &quot;status&quot;:&quot;pendent&quot;}' -H &quot;Content-Type: application/json&quot; -X POST | json_pp</code>
+    </p>
+    <ul>
+      <li>
+        <h3>Update a task</h3>
+      </li>
+    </ul>
+    <blockquote>
+      <h5>you shoud copy the id of your created task to include it to the id params request to udpate.</h5>
+    </blockquote>
+    <p>
+      <code>bash curl http://localhost:3000/todo/id -d '{&quot;task&quot;: &quot;read a book&quot;, &quot;status&quot;:&quot;pendent&quot;}' -H &quot;Content-Type: application/json&quot; -X PUT | json_pp</code>
+    </p>
+    <ul>
+      <li>
+        <h3>List all taks</h3>
+      </li>
+    </ul>
+    <p><code>bash curl http://localhost:3000/todo/ -X GET | json_pp</code></p>
+    <ul>
+      <li>
+        <h3>List a specific task</h3>
+      </li>
+    </ul>
+    <blockquote>
+      <h5>you shoud copy the id of the task that you want to see the detais and include it on the id params request.
+      </h5>
+    </blockquote>
+    <p><code>bash curl http://localhost:3000/todo/id -X GET | json_pp</code></p>
+    <ul>
+      <li>
+        <h3>Delete a task</h3>
+      </li>
+    </ul>
+    <blockquote>
+      <h5>you shoud copy the id of the task that you want to delete and include it on the id params request.</h5>
+    </blockquote>
+    <p><code>bash curl http://localhost:3000/todo/id -X DELETE</code></p>
+    <h2 id="deployment">Deployment</h2>
+    The application was deployed on <a href="https://dashboard.heroku.com/">herokuapp</a>;
+    <p>To test it follot the steps:</p>
+    <blockquote>
+      <h5>you should follow the same steps before to test the endpoint, but now changing the url to heroku.</h5>
+    </blockquote>
+    <ul>
+      <li>
+        <h3>To create a new task</h3>
+      </li>
+    </ul>
+    <p>
+      <code>bash curl http://case-todo.herokuapp.com/todo -d '{&quot;task&quot;:&quot;read a book&quot;, &quot;status&quot;:&quot;pendent&quot;}' -H &quot;Content-Type: application/json&quot; -X POST | json_pp</code>
+    </p>
+    <ul>
+      <li>
+        <h3>Update a task</h3>
+      </li>
+    </ul>
+    <blockquote>
+      <h5>you shoud copy the id of your created task to include it to the id params request to udpate.</h5>
+    </blockquote>
+    <p>
+      <code>bash curl http://case-todo.herokuapp.com/todo/id -d '{&quot;task&quot;: &quot;read a book&quot;, &quot;status&quot;:&quot;pendent&quot;}' -H &quot;Content-Type: application/json&quot; -X PUT | json_pp</code>
+    </p>
+    <ul>
+      <li>
+        <h3>List all taks</h3>
+      </li>
+    </ul>
+    <p><code>bash curl http://case-todo.herokuapp.com/todo -X GET | json_pp</code></p>
+    <ul>
+      <li>
+        <h3>List a specific task</h3>
+      </li>
+    </ul>
+    <blockquote>
+      <h5>you shoud copy the id of the task that you want to see the detais and include it on the id params request.
+      </h5>
+    </blockquote>
+    <p><code>bash curlhttp://case-todo.herokuapp.com/todo/id -X GET | json_pp</code></p>
+    <ul>
+      <li>
+        <h3>Delete a task</h3>
+      </li>
+    </ul>
+    <blockquote>
+      <h5>you shoud copy the id of the task that you want to delete and include it on the id params request.</h5>
+    </blockquote>
+    <p><code>bash curl http://case-todo.herokuapp.com/todo/id -X DELETE</code></p>
+  </div>
+</body>
+
+</html>
